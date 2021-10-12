@@ -1,4 +1,4 @@
-package ltd.morty.LootBag.config;
+package cn.rainspace.lootbag.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 

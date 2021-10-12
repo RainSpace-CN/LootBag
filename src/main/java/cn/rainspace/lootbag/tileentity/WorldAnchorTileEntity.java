@@ -1,4 +1,4 @@
-package ltd.morty.LootBag.tileentity;
+package cn.rainspace.lootbag.tileentity;
 
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -17,7 +17,7 @@ public class WorldAnchorTileEntity extends TileEntity implements ITickableTileEn
 		if(!level.isClientSide) {
 			if(timer==1) {
 				ChunkPos chunkpos = new ChunkPos(getBlockPos());
-				ForgeChunkManager.forceChunk((ServerWorld) level, "loot_bag", getBlockPos(), chunkpos.x, chunkpos.z, false, true);
+				ForgeChunkManager.forceChunk((ServerWorld) level, "lootbag", getBlockPos(), chunkpos.x, chunkpos.z, false, true);
 			}
 			if(timer>0)
 				timer--;
@@ -27,7 +27,7 @@ public class WorldAnchorTileEntity extends TileEntity implements ITickableTileEn
 	public int enpower() {
 		if(timer==0) {
 			ChunkPos chunkpos = new ChunkPos(getBlockPos());
-			ForgeChunkManager.forceChunk((ServerWorld) level, "loot_bag", getBlockPos(), chunkpos.x, chunkpos.z, true, true);
+			ForgeChunkManager.forceChunk((ServerWorld) level, "lootbag", getBlockPos(), chunkpos.x, chunkpos.z, true, true);
 		}
 		timer+=VALUE;
 		return timer;

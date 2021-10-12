@@ -1,7 +1,7 @@
-package ltd.morty.LootBag.item;
+package cn.rainspace.lootbag.item;
 
-import ltd.morty.LootBag.Global;
-import ltd.morty.LootBag.block.ModBlocks;
+import cn.rainspace.lootbag.block.ModBlocks;
+import cn.rainspace.lootbag.Global;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

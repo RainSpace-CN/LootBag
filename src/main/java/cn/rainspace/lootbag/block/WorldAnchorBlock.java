@@ -1,8 +1,8 @@
-package ltd.morty.LootBag.block;
+package cn.rainspace.lootbag.block;
 
 import javax.annotation.Nullable;
 
-import ltd.morty.LootBag.tileentity.WorldAnchorTileEntity;
+import cn.rainspace.lootbag.tileentity.WorldAnchorTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,7 +42,7 @@ public class WorldAnchorBlock extends Block{
 	public void destroy(IWorld world, BlockPos pos, BlockState state) {
 		if(!world.isClientSide()) {
 			ChunkPos chunkpos = new ChunkPos(pos);
-			ForgeChunkManager.forceChunk((ServerWorld) world, "loot_bag", pos, chunkpos.x, chunkpos.z, false, true);
+			ForgeChunkManager.forceChunk((ServerWorld) world, "lootbag", pos, chunkpos.x, chunkpos.z, false, true);
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class WorldAnchorBlock extends Block{
 			}else {
 				WorldAnchorTileEntity tileentity = (WorldAnchorTileEntity)world.getBlockEntity(blockpos);
 				int timer = tileentity.enpower()/20;
-				TranslationTextComponent translationTextComponent = new TranslationTextComponent("message.loot_bag.timer", timer);
+				TranslationTextComponent translationTextComponent = new TranslationTextComponent("message.lootbag.timer", timer);
 			    player.sendMessage(translationTextComponent, player.getUUID());
 				if (!player.abilities.instabuild) {
 		        	itemstack.shrink(1);

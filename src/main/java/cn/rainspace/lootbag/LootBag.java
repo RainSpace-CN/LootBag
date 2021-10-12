@@ -1,5 +1,6 @@
-package ltd.morty.LootBag;
+package cn.rainspace.lootbag;
 
+import cn.rainspace.lootbag.config.Config;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,10 +19,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ltd.morty.LootBag.block.ModBlocks;
-import ltd.morty.LootBag.config.*;
-import ltd.morty.LootBag.item.ModItems;
-import ltd.morty.LootBag.tileentity.ModTileEntityType;
+import cn.rainspace.lootbag.block.ModBlocks;
+import cn.rainspace.lootbag.item.ModItems;
+import cn.rainspace.lootbag.tileentity.ModTileEntityType;
 
 import java.util.stream.Collectors;
 
@@ -66,7 +66,7 @@ public class LootBag
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo("lootbag", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)

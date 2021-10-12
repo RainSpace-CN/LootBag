@@ -1,7 +1,7 @@
-package ltd.morty.LootBag.tileentity;
+package cn.rainspace.lootbag.tileentity;
 
-import ltd.morty.LootBag.Global;
-import ltd.morty.LootBag.block.ModBlocks;
+import cn.rainspace.lootbag.block.ModBlocks;
+import cn.rainspace.lootbag.Global;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

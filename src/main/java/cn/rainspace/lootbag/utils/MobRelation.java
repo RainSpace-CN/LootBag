@@ -1,4 +1,4 @@
-package ltd.morty.LootBag.utils;
+package cn.rainspace.lootbag.utils;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
@@ -13,8 +13,8 @@ import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 
 public class MobRelation{
-	public static enum Relation {
-		FRIEND, FOE, UNKNOWN;
+	public enum Relation {
+		FRIEND, FOE, UNKNOWN
 	}
 
 	public static Relation determineRelation(Entity entity) {
