@@ -15,5 +15,4 @@ public class ModItems
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Global.MOD_ID);
     
     public static final RegistryObject<Item> lootBag = ITEMS.register("loot_bag", ()->new LootBagItem(new Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<Item> obsidianBlock = ITEMS.register("world_anchor_block", ()->new BlockItem(ModBlocks.worldAnchorBlock.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 }
