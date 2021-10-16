@@ -1,10 +1,10 @@
 # Loot Bag
 Foliet's First Mod
 
-一个不错的战利品袋子mod
+A nice loot bag mod
 
-每次击杀怪物有 **2%** 的几率掉落战利品袋子
+Every time you kill a monster, there is a **2%** chance to drop a loot bag
 
-右键打开战利品袋子可以随机从沉船遗迹等箱子里抽一张战利品表，并从其中抽 **10** 次战利品
+Right-click to open the loot bag to randomly draw a loot table from the wreck ruins and other chests, and draw **10** loot from it
 
-掉落几率和抽取次数可在配置文件修改
+The drop probability and the number of draws can be modified in the configuration file 
