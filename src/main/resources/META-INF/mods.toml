@@ -25,7 +25,7 @@ displayName="Loot Bag" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://mcmod.rainspace.cn/lootbag" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/loot-bag" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="loot_bag.png" #optional
 # A text field displayed in the mod UI
@@ -35,9 +35,9 @@ authors="Foliet" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 Foliet's First Mod
-一个不错的战利品袋子mod
-每次击杀怪物有2%的几率掉落战利品袋子
-可在配置文件修改
+A nice loot bag mod
+Every time you kill a monster, there is a 2% chance to drop a loot bag
+Right-click to open the loot bag to randomly draw a loot table from a random loot chest, and pick 10 loot from it
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.lootbag]] #optional
