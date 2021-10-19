@@ -12,7 +12,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.1'
+version = '1.16.5-1.0.1'
 group = 'cn.rainspace' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'LootBag'
 
@@ -143,12 +143,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "lootbag",
-            "Specification-Vendor": "Foliet",
+            "Specification-Title": "Loot Bag",
+            "Specification-Vendor": "RainSpace Studio",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"Foliet",
+            "Implementation-Vendor" :"RainSpace Studio",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
