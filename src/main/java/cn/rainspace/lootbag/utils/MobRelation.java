@@ -12,34 +12,34 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 
-public class MobRelation{
-	public enum Relation {
-		FRIEND, FOE, UNKNOWN
-	}
+public class MobRelation {
+    public static Relation determineRelation(Entity entity) {
+        if (entity instanceof MonsterEntity) {
+            return Relation.FOE;
+        } else if (entity instanceof SlimeEntity) {
+            return Relation.FOE;
+        } else if (entity instanceof GhastEntity) {
+            return Relation.FOE;
+        } else if (entity instanceof PhantomEntity) {
+            return Relation.FOE;
+        } else if (entity instanceof EnderDragonEntity) {
+            return Relation.FOE;
+        } else if (entity instanceof AnimalEntity) {
+            return Relation.FRIEND;
+        } else if (entity instanceof SquidEntity) {
+            return Relation.FRIEND;
+        } else if (entity instanceof AmbientEntity) {
+            return Relation.FRIEND;
+        } else if (entity instanceof AgeableEntity) {
+            return Relation.FRIEND;
+        } else if (entity instanceof WaterMobEntity) {
+            return Relation.FRIEND;
+        } else {
+            return Relation.UNKNOWN;
+        }
+    }
 
-	public static Relation determineRelation(Entity entity) {
-		if (entity instanceof MonsterEntity) {
-			return Relation.FOE;
-		} else if (entity instanceof SlimeEntity) {
-		    return Relation.FOE;
-		} else if (entity instanceof GhastEntity) {
-		    return Relation.FOE;
-		} else if (entity instanceof PhantomEntity) {
-		    return Relation.FOE;
-	    } else if (entity instanceof EnderDragonEntity) {
-		    return Relation.FOE;
-		} else if (entity instanceof AnimalEntity) {
-		    return Relation.FRIEND;
-		} else if (entity instanceof SquidEntity) {
-		    return Relation.FRIEND;
-		} else if (entity instanceof AmbientEntity) {
-		    return Relation.FRIEND;
-		} else if (entity instanceof AgeableEntity) {
-		    return Relation.FRIEND;
-		} else if (entity instanceof WaterMobEntity) {
-		    return Relation.FRIEND;
-		} else {
-		    return Relation.UNKNOWN;
-		}
-	}
+    public enum Relation {
+        FRIEND, FOE, UNKNOWN
+    }
 }
