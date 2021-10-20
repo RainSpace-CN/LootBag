@@ -36,9 +36,6 @@ public class LootBagItem extends Item {
             LootTable table = world.getServer().getLootTables().get(ModLootTables.LOOT_BAG_GIFT);
             LootContext context = (new LootContext.Builder((ServerWorld) world)).withLuck(player.getLuck()).withParameter(LootParameters.THIS_ENTITY, player).withParameter(LootParameters.ORIGIN, player.position()).create(LootParameterSets.GIFT);
             List<ItemStack> loot = table.getRandomItems(context);
-            if (loot.size() <= 3) {
-                loot.addAll(table.getRandomItems(context));
-            }
             for (int i = 0; i < loot.size(); i++) {
                 GiveItem(player, loot.get(i));
             }
