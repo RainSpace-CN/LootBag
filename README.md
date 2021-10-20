@@ -2,7 +2,8 @@
 
 Foliet's First Mod
 
-Every time you kill a monster, there is a **4%** chance to drop a loot bag, you can modify the chance in the configuration file
+Every time you kill a monster, there is a **4%** chance to drop a loot bag, you can modify the chance in the
+configuration file
 
 Right-click to open the loot bag to pick up all the loot from a random loot chest or get an extra gift
 
