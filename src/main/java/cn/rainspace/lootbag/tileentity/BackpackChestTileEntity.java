@@ -5,11 +5,19 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.tileentity.ChestTileEntity;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class BackpackChestTileEntity extends ChestTileEntity {
 
     public BackpackChestTileEntity() {
         super(ModTileEntityType.BACKPACK_CHEST.get());
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new TranslationTextComponent("container.backpack_chest");
     }
 
     @Override

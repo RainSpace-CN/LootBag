@@ -34,13 +34,12 @@ logoFile="loot_bag.png" #optional
 authors="RainSpace Studio" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
+
 Foliet's First Mod
 
-A nice loot bag mod
+Every time you kill a monster, there is a 4% chance to drop a loot bag, you can modify the chance in the configuration file
 
-Every time you kill a monster, there is a 2% chance to drop a loot bag
-
-Right-click to open the loot bag to randomly draw a loot table from a random loot chest, and pick 10 loot from it
+Right-click to open the loot bag to pick up all the loot from a random loot chest or get an extra gift
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.

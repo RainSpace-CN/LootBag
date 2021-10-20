@@ -12,6 +12,6 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Const.MOD_ID);
 
     public static final RegistryObject<Item> lootBag = ITEMS.register("loot_bag", () -> new LootBagItem(new Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<Item> BACKPACK = ITEMS.register("backpack", () -> new BackpackItem(new Properties().tab(ItemGroup.TAB_MISC).stacksTo(1)));
+    public static final RegistryObject<Item> BACKPACK = ITEMS.register("backpack", () -> new BackpackItem(new Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1)));
 
 }
