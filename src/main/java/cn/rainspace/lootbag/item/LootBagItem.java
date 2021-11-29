@@ -62,7 +62,7 @@ public class LootBagItem extends Item {
             if (determineRelation(entity) == MobRelation.Relation.FOE && entity.getLastHurtByMob() instanceof PlayerEntity) {
                 Random random = new Random();
                 if (random.nextInt(100) < Config.DROP_CHANCE.get())
-                    entity.spawnAtLocation(ModItems.lootBag.get());
+                    entity.spawnAtLocation(ModItems.LOOT_BAG.get());
             }
         }
     }

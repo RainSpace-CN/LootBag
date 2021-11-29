@@ -4,9 +4,7 @@ import cn.rainspace.lootbag.block.ModBlocks;
 import cn.rainspace.lootbag.inventory.container.BackpackChestContainer;
 import cn.rainspace.lootbag.tileentity.BackpackChestTileEntity;
 import cn.rainspace.lootbag.utils.Const;
-import com.google.common.eventbus.Subscribe;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,8 +23,8 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BackpackItem extends Item {
-    public BackpackItem(Properties p_i48487_1_) {
-        super(p_i48487_1_);
+    public BackpackItem(Properties properties) {
+        super(properties);
     }
 
     @Override

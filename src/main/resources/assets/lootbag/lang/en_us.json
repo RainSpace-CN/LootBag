@@ -1,5 +1,7 @@
 {
   "item.lootbag.loot_bag": "Loot Bag",
   "item.lootbag.backpack": "Backpack",
-  "container.backpack_chest": "Backpack"
+  "item.lootbag.frost_wand": "Frost Wand",
+  "container.backpack_chest": "Backpack",
+  "explain.lootbag.frost_wand": "Generate frost lasting 15s"
 }

@@ -1,5 +1,7 @@
 {
   "item.lootbag.loot_bag": "战利品袋子",
   "item.lootbag.backpack": "背包",
-  "container.backpack_chest": "背包"
+  "item.lootbag.frost_wand": "霜冰法杖",
+  "container.backpack_chest": "背包",
+  "explain.lootbag.frost_wand": "生成持续15s的霜冰"
 }

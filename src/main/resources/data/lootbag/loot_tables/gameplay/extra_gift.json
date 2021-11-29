@@ -7,6 +7,10 @@
         {
           "type": "minecraft:item",
           "name": "lootbag:backpack"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lootbag:frost_wand"
         }
       ]
     }

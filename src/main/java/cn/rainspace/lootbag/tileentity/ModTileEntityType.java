@@ -10,5 +10,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModTileEntityType {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, Const.MOD_ID);
     public static final RegistryObject<TileEntityType<BackpackChestTileEntity>> BACKPACK_CHEST = TILE_ENTITIES.register("backpack_chest", () -> TileEntityType.Builder.of(BackpackChestTileEntity::new, ModBlocks.BACKPACK_CHEST.get()).build(null));
+    public static final RegistryObject<TileEntityType<MagicFrostedIceTileEntity>> MAGIC_FROSTED_ICE = TILE_ENTITIES.register("magic_frosted_ice", () -> TileEntityType.Builder.of(MagicFrostedIceTileEntity::new, ModBlocks.MAGIC_FROSTED_ICE.get()).build(null));
 
 }
