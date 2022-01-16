@@ -3,16 +3,16 @@ package cn.rainspace.lootbag;
 import cn.rainspace.lootbag.block.ModBlocks;
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.gui.screen.BackpackChestScreen;
-import cn.rainspace.lootbag.inventory.container.ModContainerType;
+import cn.rainspace.lootbag.inventory.container.ModMenuType;
 import cn.rainspace.lootbag.item.ModItems;
 import cn.rainspace.lootbag.loot.ModLootTables;
-import cn.rainspace.lootbag.tileentity.ModTileEntityType;
+import cn.rainspace.lootbag.block.entity.ModBlockEntityType;
 import cn.rainspace.lootbag.utils.Const;
-import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.loot.LootTableManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -40,8 +40,8 @@ public class LootBag {
 
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModTileEntityType.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModContainerType.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlockEntityType.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModMenuType.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
     }
 
@@ -49,7 +49,7 @@ public class LootBag {
         // do something that can only be done on the client
         //LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().options);
         event.enqueueWork(() -> {
-            ScreenManager.register(ModContainerType.BACKPACK_CHEST_CONTAINER.get(), BackpackChestScreen::new);
+            MenuScreens.register(ModMenuType.BACKPACK_CHEST_CONTAINER.get(), BackpackChestScreen::new);
         });
     }
 
@@ -57,10 +57,10 @@ public class LootBag {
     public static class WorldEvents {
         @SubscribeEvent
         public static void onLoad(final WorldEvent.Load event) {
-            World world = (World) event.getWorld();
-            if (world instanceof ServerWorld) {
+            Level level = (Level) event.getWorld();
+            if (level instanceof ServerLevel) {
                 Set<ResourceLocation> lootTables = ModLootTables.all();
-                LootTableManager manager = world.getServer().getLootTables();
+                LootTables manager = level.getServer().getLootTables();
                 lootTables.forEach((e) -> {
                     MinecraftForge.EVENT_BUS.post(new LootTableLoadEvent(e, manager.get(e), manager));
                 });

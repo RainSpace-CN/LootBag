@@ -1,20 +1,19 @@
 package cn.rainspace.lootbag.item;
 
-import cn.rainspace.lootbag.block.MagicFrostedIceBlock;
 import cn.rainspace.lootbag.block.ModBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -27,27 +26,25 @@ public class FrostWandItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand){
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         BlockPos blockPos = player.blockPosition();
-        if(blockPos.getY()<=0||blockPos.getY()>=256){
-            return ActionResult.fail(itemStack);
-        }
         BlockPos blockPos1 = blockPos.below();
         BlockState blockState = world.getBlockState(blockPos1);
-        if(blockState.is(Blocks.AIR)||blockState.is(Blocks.WATER)||blockState.is(Blocks.LAVA)){
-            world.setBlockAndUpdate(blockPos1,ModBlocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
+        if (blockState.is(Blocks.AIR) || blockState.is(Blocks.WATER) || blockState.is(Blocks.LAVA)) {
+            world.setBlockAndUpdate(blockPos1, ModBlocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
             itemStack.hurtAndBreak(1, player, (entity) -> {
-                entity.broadcastBreakEvent(hand);});
-            return ActionResult.sidedSuccess(itemStack,world.isClientSide());
-        }else{
-            return ActionResult.fail(itemStack);
+                entity.broadcastBreakEvent(hand);
+            });
+            return InteractionResultHolder.sidedSuccess(itemStack, world.isClientSide());
+        } else {
+            return InteractionResultHolder.fail(itemStack);
         }
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack itemStack, @Nullable World world, List<ITextComponent> list, ITooltipFlag iTooltipFlag) {
+    public void appendHoverText(ItemStack itemStack, @Nullable Level world, List<Component> list, TooltipFlag iTooltipFlag) {
         super.appendHoverText(itemStack, world, list, iTooltipFlag);
-        list.add(new TranslationTextComponent("explain.lootbag.frost_wand").withStyle(TextFormatting.AQUA));
+        list.add(new TranslatableComponent("explain.lootbag.frost_wand").withStyle(ChatFormatting.AQUA));
     }
 }

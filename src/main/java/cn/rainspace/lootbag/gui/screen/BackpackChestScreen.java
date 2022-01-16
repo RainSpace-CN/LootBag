@@ -1,19 +1,21 @@
 package cn.rainspace.lootbag.gui.screen;
 
-import cn.rainspace.lootbag.inventory.container.BackpackChestContainer;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import cn.rainspace.lootbag.inventory.container.BackpackChestMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.IHasContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 
-public class BackpackChestScreen extends ContainerScreen<BackpackChestContainer> implements IHasContainer<BackpackChestContainer> {
+public class BackpackChestScreen extends AbstractContainerScreen<BackpackChestMenu> implements MenuAccess<BackpackChestMenu> {
     private static final ResourceLocation CONTAINER_BACKGROUND = new ResourceLocation("textures/gui/container/generic_54.png");
     private final int containerRows;
 
-    public BackpackChestScreen(BackpackChestContainer p_i51095_1_, PlayerInventory p_i51095_2_, ITextComponent p_i51095_3_) {
+    public BackpackChestScreen(BackpackChestMenu p_i51095_1_, Inventory p_i51095_2_, Component p_i51095_3_) {
         super(p_i51095_1_, p_i51095_2_, p_i51095_3_);
         this.passEvents = false;
         int i = 222;
@@ -23,18 +25,22 @@ public class BackpackChestScreen extends ContainerScreen<BackpackChestContainer>
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
-    public void render(MatrixStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
+    @Override
+    public void render(PoseStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
         this.renderBackground(p_230430_1_);
         super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
         this.renderTooltip(p_230430_1_, p_230430_2_, p_230430_3_);
     }
 
-    protected void renderBg(MatrixStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.minecraft.getTextureManager().bind(CONTAINER_BACKGROUND);
+    @Override
+    protected void renderBg(PoseStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, CONTAINER_BACKGROUND);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         this.blit(p_230450_1_, i, j, 0, 0, this.imageWidth, this.containerRows * 18 + 17);
         this.blit(p_230450_1_, i, j + this.containerRows * 18 + 17, 0, 126, this.imageWidth, 96);
     }
+
 }

@@ -79,7 +79,7 @@
         {
           "type": "minecraft:loot_table",
           "weight": 10,
-          "quality": 1,
+          "quality": 2,
           "name": "lootbag:gameplay/extra_gift"
         }
       ]

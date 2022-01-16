@@ -1,38 +1,33 @@
 package cn.rainspace.lootbag.utils;
 
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.entity.monster.PhantomEntity;
-import net.minecraft.entity.monster.SlimeEntity;
-import net.minecraft.entity.passive.AmbientEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.passive.WaterMobEntity;
+
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ambient.AmbientCreature;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.monster.Slime;
 
 public class MobRelation {
-    public static Relation determineRelation(Entity entity) {
-        if (entity instanceof MonsterEntity) {
+    public static Relation determineRelation(LivingEntity entity) {
+        if (entity instanceof Monster) {
             return Relation.FOE;
-        } else if (entity instanceof SlimeEntity) {
+        } else if (entity instanceof Slime) {
             return Relation.FOE;
-        } else if (entity instanceof GhastEntity) {
+        } else if (entity instanceof Ghast) {
             return Relation.FOE;
-        } else if (entity instanceof PhantomEntity) {
+        } else if (entity instanceof Phantom) {
             return Relation.FOE;
-        } else if (entity instanceof EnderDragonEntity) {
+        } else if (entity instanceof EnderDragon) {
             return Relation.FOE;
-        } else if (entity instanceof AnimalEntity) {
+        } else if (entity instanceof Animal) {
             return Relation.FRIEND;
-        } else if (entity instanceof SquidEntity) {
+        } else if (entity instanceof AmbientCreature) {
             return Relation.FRIEND;
-        } else if (entity instanceof AmbientEntity) {
-            return Relation.FRIEND;
-        } else if (entity instanceof AgeableEntity) {
-            return Relation.FRIEND;
-        } else if (entity instanceof WaterMobEntity) {
+        } else if (entity instanceof WaterAnimal) {
             return Relation.FRIEND;
         } else {
             return Relation.UNKNOWN;
