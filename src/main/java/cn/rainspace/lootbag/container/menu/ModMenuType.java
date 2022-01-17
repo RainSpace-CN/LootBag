@@ -1,4 +1,4 @@
-package cn.rainspace.lootbag.inventory.container;
+package cn.rainspace.lootbag.container.menu;
 
 import cn.rainspace.lootbag.utils.Const;
 import net.minecraft.network.FriendlyByteBuf;

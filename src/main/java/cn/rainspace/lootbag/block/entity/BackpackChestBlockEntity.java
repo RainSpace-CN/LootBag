@@ -1,6 +1,6 @@
 package cn.rainspace.lootbag.block.entity;
 
-import cn.rainspace.lootbag.inventory.container.BackpackChestMenu;
+import cn.rainspace.lootbag.container.menu.BackpackChestMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

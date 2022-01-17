@@ -3,7 +3,7 @@ package cn.rainspace.lootbag;
 import cn.rainspace.lootbag.block.ModBlocks;
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.gui.screen.BackpackChestScreen;
-import cn.rainspace.lootbag.inventory.container.ModMenuType;
+import cn.rainspace.lootbag.container.menu.ModMenuType;
 import cn.rainspace.lootbag.item.ModItems;
 import cn.rainspace.lootbag.loot.ModLootTables;
 import cn.rainspace.lootbag.block.entity.ModBlockEntityType;

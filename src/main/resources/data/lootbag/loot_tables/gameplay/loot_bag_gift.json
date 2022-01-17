@@ -75,12 +75,20 @@
           "weight": 10,
           "quality": 1,
           "name": "minecraft:chests/end_city_treasure"
-        },
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": 2,
+          "weight": 25,
           "name": "lootbag:gameplay/extra_gift"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 75
         }
       ]
     }

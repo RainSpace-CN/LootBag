@@ -1,6 +1,6 @@
-package cn.rainspace.lootbag.inventory.container;
+package cn.rainspace.lootbag.container.menu;
 
-import cn.rainspace.lootbag.inventory.BackpackSlot;
+import cn.rainspace.lootbag.container.BackpackSlot;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,7 +13,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class BackpackChestMenu extends AbstractContainerMenu {
     private final int containerRows;
     private final Container container;
-
 
     public BackpackChestMenu(int p_i50092_2_, Inventory p_i50092_3_, Container p_i50092_4_, int p_i50092_5_) {
         super(ModMenuType.BACKPACK_CHEST_CONTAINER.get(), p_i50092_2_);
