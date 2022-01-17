@@ -2,11 +2,11 @@ package cn.rainspace.lootbag.item;
 
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.loot.ModLootTables;
-import cn.rainspace.lootbag.utils.MobRelation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -16,13 +16,12 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Random;
-
-import static cn.rainspace.lootbag.utils.MobRelation.determineRelation;
 
 public class LootBagItem extends Item {
     public LootBagItem(Properties properties) {
@@ -56,10 +55,19 @@ public class LootBagItem extends Item {
 
     @Mod.EventBusSubscriber()
     public static class LootBagEvent {
+
+        @SubscribeEvent
+        public static void onLivingSpawn(LivingSpawnEvent.SpecialSpawn event) {
+            MobSpawnType mobSpawnType = event.getSpawnReason();
+            if(mobSpawnType == MobSpawnType.NATURAL){
+                event.getEntityLiving().addTag("natural");
+            }
+        }
+
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntityLiving();
-            if (determineRelation(entity) == MobRelation.Relation.FOE && entity.getLastHurtByMob() instanceof Player) {
+            if (!entity.getType().getCategory().isFriendly() && entity.getLastHurtByMob() instanceof Player && entity.getTags().contains("natural")) {
                 Random random = new Random();
                 if (random.nextInt(100) < Config.DROP_CHANCE.get())
                     entity.spawnAtLocation(ModItems.LOOT_BAG.get());

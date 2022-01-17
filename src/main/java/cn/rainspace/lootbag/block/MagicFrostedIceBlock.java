@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import javax.annotation.Nullable;
 
-public class MagicFrostedIceBlock extends BaseEntityBlock {
+public class MagicFrostedIceBlock extends BaseEntityBlock implements EntityBlock {
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
 
     public MagicFrostedIceBlock(Properties properties) {
@@ -36,5 +38,10 @@ public class MagicFrostedIceBlock extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new MagicFrostedIceBlockEntity(blockPos, blockState);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.MODEL;
     }
 }
