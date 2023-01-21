@@ -1,41 +1,33 @@
 package cn.rainspace.lootbag.block;
 
-import cn.rainspace.lootbag.tileentity.BackpackChestTileEntity;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ChestBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import cn.rainspace.lootbag.block.entity.BackpackChestBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class BackpackChestBlock extends ChestBlock {
 
-    public BackpackChestBlock(Properties p_i225757_1_, Supplier<TileEntityType<? extends ChestTileEntity>> p_i225757_2_) {
+    public BackpackChestBlock(Properties p_i225757_1_, Supplier<BlockEntityType<? extends ChestBlockEntity>> p_i225757_2_) {
         super(p_i225757_1_, p_i225757_2_);
     }
 
     @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new BackpackChestTileEntity();
+    public BlockEntity newBlockEntity(BlockPos p_154834_, BlockState p_154835_) {
+        return new BackpackChestBlockEntity(p_154834_, p_154835_);
     }
 
     @Override
-    public ActionResultType use(BlockState state, World world, BlockPos blockPos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-        return ActionResultType.sidedSuccess(world.isClientSide());
+    public InteractionResult use(BlockState state, Level world, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult result) {
+        return InteractionResult.sidedSuccess(world.isClientSide());
     }
 }
