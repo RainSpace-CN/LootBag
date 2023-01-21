@@ -2,6 +2,9 @@
   "item.lootbag.loot_bag": "Loot Bag",
   "item.lootbag.backpack": "Backpack",
   "item.lootbag.frost_wand": "Frost Wand",
+  "item.lootbag.magic_mirror": "Magic Mirror",
   "container.backpack_chest": "Backpack",
-  "explain.lootbag.frost_wand": "Generate frost lasting 15s"
+  "explain.lootbag.frost_wand": "Generate frost lasting 15s",
+  "explain.lootbag.magic_mirror": "The best gift is to go home",
+  "message.lootbag.cannotFindRespawnPosition": "Respawn point not set"
 }

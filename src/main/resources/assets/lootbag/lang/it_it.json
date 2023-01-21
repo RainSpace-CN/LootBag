@@ -1,0 +1,10 @@
+{
+  "item.lootbag.loot_bag": "Borsa del bottino",
+  "item.lootbag.backpack": "Zaino",
+  "item.lootbag.frost_wand": "Bacchetta ghiacciata",
+  "item.lootbag.magic_mirror": "Specchio magico",
+  "container.backpack_chest": "Zaino",
+  "explain.lootbag.frost_wand": "Genera del ghiaccio per 15s",
+  "explain.lootbag.magic_mirror": "Il regalo migliore è tornare a casa",
+  "message.lootbag.cannotFindRespawnPosition": "Punto di rinascita non impostato"
+}

@@ -1,22 +1,21 @@
-package cn.rainspace.lootbag.inventory.container;
+package cn.rainspace.lootbag.container.menu;
 
-import cn.rainspace.lootbag.inventory.BackpackSlot;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import cn.rainspace.lootbag.container.BackpackSlot;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BackpackChestContainer extends Container {
+public class BackpackChestMenu extends AbstractContainerMenu {
     private final int containerRows;
-    private final IInventory container;
+    private final Container container;
 
-
-    public BackpackChestContainer(int p_i50092_2_, PlayerInventory p_i50092_3_, IInventory p_i50092_4_, int p_i50092_5_) {
-        super(ModContainerType.BACKPACK_CHEST_CONTAINER.get(), p_i50092_2_);
+    public BackpackChestMenu(int p_i50092_2_, Inventory p_i50092_3_, Container p_i50092_4_, int p_i50092_5_) {
+        super(ModMenuType.BACKPACK_CHEST_CONTAINER.get(), p_i50092_2_);
         checkContainerSize(p_i50092_4_, p_i50092_5_ * 9);
         this.container = p_i50092_4_;
         this.containerRows = p_i50092_5_;
@@ -42,11 +41,11 @@ public class BackpackChestContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return this.container.stillValid(player);
     }
 
-    public ItemStack quickMoveStack(PlayerEntity p_82846_1_, int p_82846_2_) {
+    public ItemStack quickMoveStack(Player p_82846_1_, int p_82846_2_) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(p_82846_2_);
         if (slot != null && slot.hasItem()) {
@@ -70,12 +69,12 @@ public class BackpackChestContainer extends Container {
         return itemstack;
     }
 
-    public void removed(PlayerEntity p_75134_1_) {
+    public void removed(Player p_75134_1_) {
         super.removed(p_75134_1_);
         this.container.stopOpen(p_75134_1_);
     }
 
-    public IInventory getContainer() {
+    public Container getContainer() {
         return this.container;
     }
 

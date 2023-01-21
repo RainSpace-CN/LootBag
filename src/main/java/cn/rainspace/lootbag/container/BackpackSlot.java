@@ -1,14 +1,14 @@
-package cn.rainspace.lootbag.inventory;
+package cn.rainspace.lootbag.container;
 
 import cn.rainspace.lootbag.item.ModItems;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class BackpackSlot extends Slot {
 
-    public BackpackSlot(IInventory p_i1824_1_, int p_i1824_2_, int p_i1824_3_, int p_i1824_4_) {
+    public BackpackSlot(Container p_i1824_1_, int p_i1824_2_, int p_i1824_3_, int p_i1824_4_) {
         super(p_i1824_1_, p_i1824_2_, p_i1824_3_, p_i1824_4_);
     }
 

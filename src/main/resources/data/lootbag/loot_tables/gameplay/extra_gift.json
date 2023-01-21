@@ -10,7 +10,20 @@
         },
         {
           "type": "minecraft:item",
-          "name": "lootbag:frost_wand"
+          "name": "lootbag:frost_wand",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "forge:is_cold",
+                "forge:is_snowy"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lootbag:magic_mirror"
         }
       ]
     }
