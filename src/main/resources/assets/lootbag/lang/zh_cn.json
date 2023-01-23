@@ -2,6 +2,9 @@
   "item.lootbag.loot_bag": "战利品袋子",
   "item.lootbag.backpack": "背包",
   "item.lootbag.frost_wand": "霜冰法杖",
+  "item.lootbag.magic_mirror": "魔镜",
   "container.backpack_chest": "背包",
-  "explain.lootbag.frost_wand": "生成持续15s的霜冰"
+  "explain.lootbag.frost_wand": "生成持续15s的霜冰",
+  "explain.lootbag.magic_mirror": "回家是最好的礼物",
+  "message.lootbag.cannotFindRespawnPosition": "未设置重生点"
 }

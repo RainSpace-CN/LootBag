@@ -16,8 +16,6 @@ public class BackpackChestScreen extends ContainerScreen<BackpackChestContainer>
     public BackpackChestScreen(BackpackChestContainer p_i51095_1_, PlayerInventory p_i51095_2_, ITextComponent p_i51095_3_) {
         super(p_i51095_1_, p_i51095_2_, p_i51095_3_);
         this.passEvents = false;
-        int i = 222;
-        int j = 114;
         this.containerRows = p_i51095_1_.getRowCount();
         this.imageHeight = 114 + this.containerRows * 18;
         this.inventoryLabelY = this.imageHeight - 94;
