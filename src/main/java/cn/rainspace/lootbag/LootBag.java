@@ -42,7 +42,7 @@ public class LootBag {
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModTileEntityType.TILE_ENTITIES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModContainerType.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG);
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

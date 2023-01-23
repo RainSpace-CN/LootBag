@@ -1,6 +1,5 @@
 package cn.rainspace.lootbag.item;
 
-import cn.rainspace.lootbag.block.MagicFrostedIceBlock;
 import cn.rainspace.lootbag.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,20 +26,21 @@ public class FrostWandItem extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand){
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         BlockPos blockPos = player.blockPosition();
-        if(blockPos.getY()<=0||blockPos.getY()>=256){
+        if (blockPos.getY() <= 0 || blockPos.getY() >= 256) {
             return ActionResult.fail(itemStack);
         }
         BlockPos blockPos1 = blockPos.below();
         BlockState blockState = world.getBlockState(blockPos1);
-        if(blockState.is(Blocks.AIR)||blockState.is(Blocks.WATER)||blockState.is(Blocks.LAVA)){
-            world.setBlockAndUpdate(blockPos1,ModBlocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
+        if (blockState.is(Blocks.AIR) || blockState.is(Blocks.WATER) || blockState.is(Blocks.LAVA)) {
+            world.setBlockAndUpdate(blockPos1, ModBlocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
             itemStack.hurtAndBreak(1, player, (entity) -> {
-                entity.broadcastBreakEvent(hand);});
-            return ActionResult.sidedSuccess(itemStack,world.isClientSide());
-        }else{
+                entity.broadcastBreakEvent(hand);
+            });
+            return ActionResult.sidedSuccess(itemStack, world.isClientSide());
+        } else {
             return ActionResult.fail(itemStack);
         }
     }

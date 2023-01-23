@@ -2,8 +2,8 @@ package cn.rainspace.lootbag.item;
 
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.loot.ModLootTables;
-import cn.rainspace.lootbag.utils.MobRelation;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,13 +16,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Random;
-
-import static cn.rainspace.lootbag.utils.MobRelation.determineRelation;
 
 public class LootBagItem extends Item {
     public LootBagItem(Properties properties) {
@@ -36,15 +35,15 @@ public class LootBagItem extends Item {
             LootTable table = world.getServer().getLootTables().get(ModLootTables.LOOT_BAG_GIFT);
             LootContext context = (new LootContext.Builder((ServerWorld) world)).withLuck(player.getLuck()).withParameter(LootParameters.THIS_ENTITY, player).withParameter(LootParameters.ORIGIN, player.position()).create(LootParameterSets.GIFT);
             List<ItemStack> loot = table.getRandomItems(context);
-            for (int i = 0; i < loot.size(); i++) {
-                GiveItem(player, loot.get(i));
+            for (ItemStack itemStack : loot) {
+                giveItem(player, itemStack);
             }
             itemstack.shrink(1);
         }
         return ActionResult.sidedSuccess(itemstack, world.isClientSide());
     }
 
-    public boolean GiveItem(PlayerEntity player, ItemStack itemStack) {
+    public boolean giveItem(PlayerEntity player, ItemStack itemStack) {
         if (player.inventory.getFreeSlot() >= 0) {
             player.addItem(itemStack);
             return true;
@@ -57,9 +56,17 @@ public class LootBagItem extends Item {
     @Mod.EventBusSubscriber()
     public static class LootBagEvent {
         @SubscribeEvent
+        public static void onLivingSpawn(LivingSpawnEvent.SpecialSpawn event) {
+            SpawnReason mobSpawnType = event.getSpawnReason();
+            if (mobSpawnType == SpawnReason.NATURAL) {
+                event.getEntityLiving().addTag("natural");
+            }
+        }
+
+        @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntityLiving();
-            if (determineRelation(entity) == MobRelation.Relation.FOE && entity.getLastHurtByMob() instanceof PlayerEntity) {
+            if (!entity.getType().getCategory().isFriendly() && event.getSource().getDirectEntity() instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
                 Random random = new Random();
                 if (random.nextInt(100) < Config.DROP_CHANCE.get())
                     entity.spawnAtLocation(ModItems.LOOT_BAG.get());
