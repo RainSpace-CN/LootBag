@@ -11,6 +11,9 @@ public class ModLootTables {
     private static final Set<ResourceLocation> LOCATIONS = Sets.newHashSet();
     public static final ResourceLocation LOOT_BAG_GIFT = register("gameplay/loot_bag_gift");
     public static final ResourceLocation EXTRA_GIFT = register("gameplay/extra_gift");
+    public static final ResourceLocation BASTION_REMNANT = register("gameplay/bastion_remnant");
+    public static final ResourceLocation ANCIENT_CITY = register("gameplay/ancient_city");
+    public static final ResourceLocation STRONGHOLD = register("gameplay/stronghold");
     private static final Set<ResourceLocation> IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
 
     private static ResourceLocation register(String p_186373_0_) {
