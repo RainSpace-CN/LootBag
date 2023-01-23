@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.19.2-1.2.0-Beta'
+version = '1.19.2-1.2.0'
 group = 'cn.rainspace' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'LootBag'
 

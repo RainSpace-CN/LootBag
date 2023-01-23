@@ -193,13 +193,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 15,
+          "weight": 10,
           "quality": 1,
           "name": "lootbag:gameplay/extra_gift"
         },
         {
           "type": "minecraft:empty",
-          "weight": 85
+          "weight": 90
         }
       ]
     }

@@ -1,5 +1,6 @@
 package cn.rainspace.lootbag.loot;
 
+import cn.rainspace.lootbag.config.Config;
 import com.google.gson.Gson;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
@@ -30,6 +31,9 @@ public class BiomeCondition implements LootItemCondition {
 
     @Override
     public boolean test(LootContext lootContext) {
+        if (!Config.BIOME_MODE.get()) {
+            return true;
+        }
         ItemStack itemstack = lootContext.getParamOrNull(LootContextParams.TOOL);
         if (itemstack == null) {
             return false;
