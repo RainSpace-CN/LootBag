@@ -7,74 +7,170 @@
         {
           "type": "minecraft:loot_table",
           "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/jungle_temple"
+          "quality": 1,
+          "name": "minecraft:chests/jungle_temple",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/jungle_temple"
+              ]
+            }
+          ]
         },
         {
           "type": "minecraft:loot_table",
-          "weight": 10,
+          "weight": 25,
           "quality": -1,
           "name": "minecraft:chests/simple_dungeon"
         },
         {
           "type": "minecraft:loot_table",
           "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/stronghold_library"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/abandoned_mineshaft"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/desert_pyramid"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/woodland_mansion"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/ruined_portal"
-        },
-        {
-          "type": "minecraft:loot_table",
-          "weight": 10,
-          "quality": -1,
-          "name": "minecraft:chests/stronghold_corridor"
+          "quality": 1,
+          "name": "minecraft:chests/abandoned_mineshaft",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/mineshaft",
+                "minecraft:has_structure/mineshaft_mesa"
+              ]
+            }
+          ]
         },
         {
           "type": "minecraft:loot_table",
           "weight": 10,
           "quality": 1,
-          "name": "minecraft:chests/shipwreck_treasure"
+          "name": "minecraft:chests/desert_pyramid",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/desert_pyramid"
+              ]
+            }
+          ]
         },
         {
           "type": "minecraft:loot_table",
           "weight": 10,
           "quality": 1,
-          "name": "minecraft:chests/buried_treasure"
+          "name": "minecraft:chests/woodland_mansion",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/woodland_mansion"
+              ]
+            }
+          ]
         },
         {
           "type": "minecraft:loot_table",
           "weight": 10,
           "quality": 1,
-          "name": "minecraft:chests/bastion_treasure"
+          "name": "minecraft:chests/ruined_portal",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/ruined_portal_desert",
+                "minecraft:has_structure/ruined_portal_jungle",
+                "minecraft:has_structure/ruined_portal_ocean",
+                "minecraft:has_structure/ruined_portal_swamp",
+                "minecraft:has_structure/ruined_portal_mountain",
+                "minecraft:has_structure/ruined_portal_standard",
+                "minecraft:has_structure/ruined_portal_nether"
+              ]
+            }
+          ]
         },
         {
           "type": "minecraft:loot_table",
           "weight": 10,
           "quality": 1,
-          "name": "minecraft:chests/end_city_treasure"
+          "name": "minecraft:chests/shipwreck_treasure",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/shipwreck_beached",
+                "minecraft:has_structure/shipwreck"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 1,
+          "name": "minecraft:chests/buried_treasure",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/buried_treasure"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 1,
+          "name": "minecraft:chests/nether_bridge",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/nether_fortress"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 1,
+          "name": "minecraft:chests/end_city_treasure",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/end_city"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 1,
+          "name": "lootbag:gameplay/stronghold",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/stronghold"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:loot_table",
+          "weight": 10,
+          "quality": 1,
+          "name": "lootbag:gameplay/bastion_remnant",
+          "conditions": [
+            {
+              "condition": "lootbag:biome_condition",
+              "biome_tag": [
+                "minecraft:has_structure/bastion_remnant"
+              ]
+            }
+          ]
         }
       ]
     },
@@ -83,12 +179,13 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "weight": 25,
+          "weight": 10,
+          "quality": 1,
           "name": "lootbag:gameplay/extra_gift"
         },
         {
           "type": "minecraft:empty",
-          "weight": 75
+          "weight": 90
         }
       ]
     }
