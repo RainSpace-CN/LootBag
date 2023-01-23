@@ -2,7 +2,6 @@ package cn.rainspace.lootbag.item;
 
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.loot.ModLootTables;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -34,17 +33,20 @@ public class LootBagItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         if (!world.isClientSide) {
-//            CompoundTag tag = itemstack.getTag();
-//            if (tag != null) {
-//                tag.getAllKeys().forEach((t) -> {
-//                    System.out.println(t);
-//                });
-//            }
             LootTable table = world.getServer().getLootTables().get(ModLootTables.LOOT_BAG_GIFT);
             LootContext context = (new LootContext.Builder((ServerLevel) world)).withLuck(player.getLuck()).withParameter(LootContextParams.THIS_ENTITY, player).withParameter(LootContextParams.TOOL, itemstack).withParameter(LootContextParams.ORIGIN, player.position()).create(LootContextParamSets.GIFT);
             List<ItemStack> loot = table.getRandomItems(context);
             for (ItemStack itemStack : loot) {
-                giveItem(player, itemStack);
+                boolean shouldGet = true;
+                for (String id : Config.BLACK_LIST.get()) {
+                    if (id.equals(itemStack.getItem().builtInRegistryHolder().key().location().toString())) {
+                        shouldGet = false;
+                        break;
+                    }
+                }
+                if (shouldGet) {
+                    giveItem(player, itemStack);
+                }
             }
             itemstack.shrink(1);
         }

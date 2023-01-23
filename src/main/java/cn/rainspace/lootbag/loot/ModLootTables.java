@@ -3,7 +3,6 @@ package cn.rainspace.lootbag.loot;
 import cn.rainspace.lootbag.utils.Const;
 import com.google.common.collect.Sets;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.LootTable;
 
 import java.util.Collections;
 import java.util.Set;
