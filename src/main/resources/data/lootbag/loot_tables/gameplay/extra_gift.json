@@ -11,6 +11,10 @@
         {
           "type": "minecraft:item",
           "name": "lootbag:frost_wand"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "lootbag:magic_mirror"
         }
       ]
     }

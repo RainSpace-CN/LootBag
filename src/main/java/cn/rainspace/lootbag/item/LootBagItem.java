@@ -11,8 +11,11 @@ import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
+import net.minecraft.nbt.StringNBT;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -33,10 +36,24 @@ public class LootBagItem extends Item {
         ItemStack itemstack = player.getItemInHand(hand);
         if (!world.isClientSide) {
             LootTable table = world.getServer().getLootTables().get(ModLootTables.LOOT_BAG_GIFT);
-            LootContext context = (new LootContext.Builder((ServerWorld) world)).withLuck(player.getLuck()).withParameter(LootParameters.THIS_ENTITY, player).withParameter(LootParameters.ORIGIN, player.position()).create(LootParameterSets.GIFT);
+            LootContext context = (new LootContext.Builder((ServerWorld) world))
+                    .withLuck(player.getLuck())
+                    .withParameter(LootParameters.THIS_ENTITY, player)
+                    .withParameter(LootParameters.TOOL, itemstack)
+                    .withParameter(LootParameters.ORIGIN, player.position())
+                    .create(LootParameterSets.GIFT);
             List<ItemStack> loot = table.getRandomItems(context);
             for (ItemStack itemStack : loot) {
-                giveItem(player, itemStack);
+                boolean shouldGet = true;
+                for (String id : Config.BLACK_LIST.get()) {
+                    if (id.equals(itemStack.getItem().getRegistryName().toString())) {
+                        shouldGet = false;
+                        break;
+                    }
+                }
+                if (shouldGet) {
+                    giveItem(player, itemStack);
+                }
             }
             itemstack.shrink(1);
         }
@@ -68,8 +85,14 @@ public class LootBagItem extends Item {
             LivingEntity entity = event.getEntityLiving();
             if (!entity.getType().getCategory().isFriendly() && event.getSource().getDirectEntity() instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
                 Random random = new Random();
-                if (random.nextInt(100) < Config.DROP_CHANCE.get())
-                    entity.spawnAtLocation(ModItems.LOOT_BAG.get());
+                if (random.nextInt(100) < Config.DROP_CHANCE.get()) {
+                    ItemStack itemStack = new ItemStack(ModItems.LOOT_BAG.get());
+                    String biomeName = entity.level.getBiome(entity.blockPosition()).getRegistryName().toString();
+                    String dimensionType = entity.level.dimensionType().effectsLocation().toString();
+                    itemStack.addTagElement("biomeName", StringNBT.valueOf(biomeName));
+                    itemStack.addTagElement("dimensionType", StringNBT.valueOf(dimensionType));
+                    entity.spawnAtLocation(itemStack);
+                }
             }
         }
     }
