@@ -2,6 +2,7 @@ package cn.rainspace.lootbag.item;
 
 import cn.rainspace.lootbag.config.Config;
 import cn.rainspace.lootbag.loot.ModLootTables;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,10 +13,7 @@ import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.StringNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.DimensionType;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -83,7 +81,14 @@ public class LootBagItem extends Item {
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntityLiving();
-            if (!entity.getType().getCategory().isFriendly() && event.getSource().getDirectEntity() instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
+            DamageSource source = event.getSource();
+            Entity owner = null;
+            if (source instanceof IndirectEntityDamageSource) {
+                owner = source.getEntity();
+            } else if (source instanceof EntityDamageSource) {
+                owner = source.getDirectEntity();
+            }
+            if (!entity.getType().getCategory().isFriendly() && owner instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
                 Random random = new Random();
                 if (random.nextInt(100) < Config.DROP_CHANCE.get()) {
                     ItemStack itemStack = new ItemStack(ModItems.LOOT_BAG.get());
