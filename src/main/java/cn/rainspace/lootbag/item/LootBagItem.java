@@ -81,14 +81,7 @@ public class LootBagItem extends Item {
         @SubscribeEvent
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntityLiving();
-            DamageSource source = event.getSource();
-            Entity owner = null;
-            if (source instanceof IndirectEntityDamageSource) {
-                owner = source.getEntity();
-            } else if (source instanceof EntityDamageSource) {
-                owner = source.getDirectEntity();
-            }
-            if (!entity.getType().getCategory().isFriendly() && owner instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
+            if (!entity.getType().getCategory().isFriendly() && entity.getLastHurtByMob() instanceof PlayerEntity && (!Config.ONLY_DROP_BY_NATURAL_ENTITY.get() || entity.getTags().contains("natural"))) {
                 Random random = new Random();
                 if (random.nextInt(100) < Config.DROP_CHANCE.get()) {
                     ItemStack itemStack = new ItemStack(ModItems.LOOT_BAG.get());
