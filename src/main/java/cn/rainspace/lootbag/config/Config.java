@@ -10,6 +10,7 @@ public class Config {
     public static ForgeConfigSpec.IntValue DROP_CHANCE;
     public static ForgeConfigSpec.BooleanValue ONLY_DROP_BY_NATURAL_ENTITY;
     public static ForgeConfigSpec.BooleanValue BIOME_MODE;
+    public static ForgeConfigSpec.BooleanValue SLOT_MODE;
 
     public static ForgeConfigSpec.ConfigValue<List<? extends String>> BLACK_LIST;
 
@@ -25,6 +26,9 @@ public class Config {
         BIOME_MODE = SERVER_BUILDER
                 .comment("Spawn different Loot Bag in different biomes")
                 .define("BiomeMode", true);
+        SLOT_MODE = SERVER_BUILDER
+                .comment("(Experimental) Make Loot Bag have slots so you can choose which rewards you want")
+                .define("SlotMode", false);
         BLACK_LIST = SERVER_BUILDER
                 .comment("Disable some items from Loot Bag")
                 .define("BlackList", ImmutableList.of("minecraft:example_item"), Config::isStringList);
