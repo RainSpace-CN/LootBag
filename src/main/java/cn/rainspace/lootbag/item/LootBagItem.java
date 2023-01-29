@@ -1,11 +1,15 @@
 package cn.rainspace.lootbag.item;
 
 import cn.rainspace.lootbag.config.Config;
+import cn.rainspace.lootbag.inventory.LootBagInventory;
+import cn.rainspace.lootbag.inventory.container.LootBagContainer;
 import cn.rainspace.lootbag.loot.ModLootTables;
-import net.minecraft.entity.Entity;
+import cn.rainspace.lootbag.tileentity.LootBagTileEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -13,13 +17,17 @@ import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootParameters;
 import net.minecraft.loot.LootTable;
 import net.minecraft.nbt.StringNBT;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.List;
 import java.util.Random;
@@ -32,7 +40,7 @@ public class LootBagItem extends Item {
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (!world.isClientSide) {
+        if (!world.isClientSide && hand == Hand.MAIN_HAND) {
             LootTable table = world.getServer().getLootTables().get(ModLootTables.LOOT_BAG_GIFT);
             LootContext context = (new LootContext.Builder((ServerWorld) world))
                     .withLuck(player.getLuck())
@@ -41,6 +49,7 @@ public class LootBagItem extends Item {
                     .withParameter(LootParameters.ORIGIN, player.position())
                     .create(LootParameterSets.GIFT);
             List<ItemStack> loot = table.getRandomItems(context);
+            NonNullList<ItemStack> filteredLoot = NonNullList.create();
             for (ItemStack itemStack : loot) {
                 boolean shouldGet = true;
                 for (String id : Config.BLACK_LIST.get()) {
@@ -50,6 +59,15 @@ public class LootBagItem extends Item {
                     }
                 }
                 if (shouldGet) {
+                    filteredLoot.add(itemStack);
+                }
+            }
+            if (Config.SLOT_MODE.get()) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, new LootBagTileEntity((id, playerInventory, unused) -> {
+                    return new LootBagContainer(ContainerType.GENERIC_9x3, id, playerInventory, new LootBagInventory(filteredLoot), 3);
+                }, new TranslationTextComponent("item.lootbag.loot_bag")));
+            } else {
+                for (ItemStack itemStack : filteredLoot) {
                     giveItem(player, itemStack);
                 }
             }
@@ -86,9 +104,17 @@ public class LootBagItem extends Item {
                 if (random.nextInt(100) < Config.DROP_CHANCE.get()) {
                     ItemStack itemStack = new ItemStack(ModItems.LOOT_BAG.get());
                     String biomeName = entity.level.getBiome(entity.blockPosition()).getRegistryName().toString();
-                    String dimensionType = entity.level.dimensionType().effectsLocation().toString();
+                    World world = entity.level;
+                    String dimensionTypeString = "";
+                    if (world.dimension() == World.OVERWORLD) {
+                        dimensionTypeString = "minecraft:overworld";
+                    } else if (world.dimension() == World.NETHER) {
+                        dimensionTypeString = "minecraft:the_nether";
+                    } else if (world.dimension() == World.END) {
+                        dimensionTypeString = "minecraft:the_end";
+                    }
                     itemStack.addTagElement("biomeName", StringNBT.valueOf(biomeName));
-                    itemStack.addTagElement("dimensionType", StringNBT.valueOf(dimensionType));
+                    itemStack.addTagElement("dimensionType", StringNBT.valueOf(dimensionTypeString));
                     entity.spawnAtLocation(itemStack);
                 }
             }
