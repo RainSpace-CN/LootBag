@@ -45,7 +45,7 @@ public class MagicMirrorItem extends Item {
                     }
                 });
             }
-            serverPlayer.moveTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+            serverPlayer.teleportTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
             level.playSound(null, blockPos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
             serverLevel1.playSound(null, blockPos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
         }

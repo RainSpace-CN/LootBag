@@ -1,10 +1,9 @@
 package cn.rainspace.lootbag.container;
 
-import cn.rainspace.lootbag.item.ModItems;
+import cn.rainspace.lootbag.item.Items;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 public class BackpackSlot extends Slot {
 
@@ -14,6 +13,6 @@ public class BackpackSlot extends Slot {
 
     @Override
     public boolean mayPlace(ItemStack itemStack) {
-        return itemStack.getItem() != ModItems.BACKPACK.get() && itemStack.getItem() != Items.SHULKER_BOX;
+        return itemStack.getItem() != Items.BACKPACK.get() && itemStack.getItem() != net.minecraft.world.item.Items.SHULKER_BOX;
     }
 }

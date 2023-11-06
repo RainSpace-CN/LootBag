@@ -1,6 +1,6 @@
 package cn.rainspace.lootbag.item;
 
-import cn.rainspace.lootbag.block.ModBlocks;
+import cn.rainspace.lootbag.block.Blocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,8 +29,8 @@ public class FrostWandItem extends Item {
         BlockPos blockPos = player.blockPosition();
         BlockPos blockPos1 = blockPos.below();
         BlockState blockState = world.getBlockState(blockPos1);
-        if (blockState.is(Blocks.AIR) || blockState.is(Blocks.WATER) || blockState.is(Blocks.LAVA)) {
-            world.setBlockAndUpdate(blockPos1, ModBlocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
+        if (blockState.is(net.minecraft.world.level.block.Blocks.AIR) || blockState.is(net.minecraft.world.level.block.Blocks.WATER) || blockState.is(net.minecraft.world.level.block.Blocks.LAVA)) {
+            world.setBlockAndUpdate(blockPos1, Blocks.MAGIC_FROSTED_ICE.get().defaultBlockState());
             itemStack.hurtAndBreak(1, player, (entity) -> {
                 entity.broadcastBreakEvent(hand);
             });

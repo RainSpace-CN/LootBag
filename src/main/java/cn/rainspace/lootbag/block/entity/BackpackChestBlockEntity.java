@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BackpackChestBlockEntity extends ChestBlockEntity {
 
     public BackpackChestBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityType.BACKPACK_CHEST.get(), blockPos, blockState);
+        super(BlockEntitys.BACKPACK_CHEST.get(), blockPos, blockState);
     }
 
     @Override

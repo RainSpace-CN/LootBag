@@ -12,7 +12,7 @@ public class MagicFrostedIceBlockEntity extends BlockEntity  {
     private int counter = LIVING_TIME;
 
     public MagicFrostedIceBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntityType.MAGIC_FROSTED_ICE.get(),blockPos,blockState);
+        super(BlockEntitys.MAGIC_FROSTED_ICE.get(),blockPos,blockState);
     }
 
     public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, MagicFrostedIceBlockEntity blockEntity) {

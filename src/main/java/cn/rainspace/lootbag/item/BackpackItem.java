@@ -1,8 +1,8 @@
 package cn.rainspace.lootbag.item;
 
-import cn.rainspace.lootbag.block.ModBlocks;
-import cn.rainspace.lootbag.container.menu.BackpackChestMenu;
+import cn.rainspace.lootbag.block.Blocks;
 import cn.rainspace.lootbag.block.entity.BackpackChestBlockEntity;
+import cn.rainspace.lootbag.container.menu.BackpackChestMenu;
 import cn.rainspace.lootbag.utils.Const;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -31,8 +31,7 @@ public class BackpackItem extends Item {
 
     @SubscribeEvent
     public static void onCloseMenu(PlayerContainerEvent.Close event) {
-        if (event.getContainer() instanceof BackpackChestMenu) {
-            BackpackChestMenu container = (BackpackChestMenu) event.getContainer();
+        if (event.getContainer() instanceof BackpackChestMenu container) {
             BackpackChestBlockEntity tileEntity = (BackpackChestBlockEntity) container.getContainer();
             ChunkPos chunkPos = new ChunkPos(tileEntity.getBlockPos());
             ForgeChunkManager.forceChunk((ServerLevel) tileEntity.getLevel(), Const.MOD_ID, tileEntity.getBlockPos(), chunkPos.x, chunkPos.z, false, true);
@@ -47,7 +46,7 @@ public class BackpackItem extends Item {
             return InteractionResultHolder.success(itemStack);
         }
         ServerLevel overWorld = world.getServer().getLevel(Level.OVERWORLD);
-        BlockPos blockPos = this.getChestPos(overWorld,itemStack);
+        BlockPos blockPos = this.getChestPos(overWorld, itemStack);
         BlockEntity chest = overWorld.getBlockEntity(blockPos);
         if (!(chest instanceof BackpackChestBlockEntity)) {
             tag.remove("pos");
@@ -61,11 +60,11 @@ public class BackpackItem extends Item {
         return InteractionResultHolder.consume(itemStack);
     }
 
-    public BlockPos getChestPos(Level world, ItemStack itemStack){
+    public BlockPos getChestPos(Level world, ItemStack itemStack) {
         CompoundTag tag = itemStack.getTag() != null ? itemStack.getTag() : new CompoundTag();
         BlockPos blockPos;
         if (!tag.contains("pos")) {
-            blockPos = this.initChest(world,itemStack,tag);
+            blockPos = this.initChest(world, itemStack, tag);
         } else {
             CompoundTag pos = (CompoundTag) tag.get("pos");
             blockPos = new BlockPos(pos.getInt("x"), pos.getInt("y"), pos.getInt("z"));
@@ -73,7 +72,7 @@ public class BackpackItem extends Item {
         return blockPos;
     }
 
-    public BlockPos initChest(Level world,ItemStack itemStack,CompoundTag tag) {
+    public BlockPos initChest(Level world, ItemStack itemStack, CompoundTag tag) {
         Random random = new Random();
         int x = random.nextInt(100000) + 100000;
         int y = -64;
@@ -85,7 +84,7 @@ public class BackpackItem extends Item {
         tag.put("pos", pos);
         itemStack.setTag(tag);
         BlockPos blockPos = new BlockPos(x, y, z);
-        world.setBlockAndUpdate(blockPos, ModBlocks.BACKPACK_CHEST.get().defaultBlockState());
+        world.setBlockAndUpdate(blockPos, Blocks.BACKPACK_CHEST.get().defaultBlockState());
         return blockPos;
     }
 }

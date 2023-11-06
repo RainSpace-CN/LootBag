@@ -3,6 +3,7 @@ package cn.rainspace.lootbag.gui.screen;
 import cn.rainspace.lootbag.container.menu.BackpackChestMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.renderer.GameRenderer;
@@ -16,30 +17,23 @@ public class BackpackChestScreen extends AbstractContainerScreen<BackpackChestMe
 
     public BackpackChestScreen(BackpackChestMenu p_i51095_1_, Inventory p_i51095_2_, Component p_i51095_3_) {
         super(p_i51095_1_, p_i51095_2_, p_i51095_3_);
-        this.passEvents = false;
-        int i = 222;
-        int j = 114;
         this.containerRows = p_i51095_1_.getRowCount();
         this.imageHeight = 114 + this.containerRows * 18;
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override
-    public void render(PoseStack p_230430_1_, int p_230430_2_, int p_230430_3_, float p_230430_4_) {
-        this.renderBackground(p_230430_1_);
-        super.render(p_230430_1_, p_230430_2_, p_230430_3_, p_230430_4_);
-        this.renderTooltip(p_230430_1_, p_230430_2_, p_230430_3_);
+    protected void renderBg(GuiGraphics p_283065_, float p_97788_, int p_97789_, int p_97790_) {
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        p_283065_.blit(CONTAINER_BACKGROUND, i, j, 0, 0, this.imageWidth, this.containerRows * 18 + 17);
+        p_283065_.blit(CONTAINER_BACKGROUND, i, j + this.containerRows * 18 + 17, 0, 126, this.imageWidth, 96);
     }
 
     @Override
-    protected void renderBg(PoseStack p_230450_1_, float p_230450_2_, int p_230450_3_, int p_230450_4_) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, CONTAINER_BACKGROUND);
-        int i = (this.width - this.imageWidth) / 2;
-        int j = (this.height - this.imageHeight) / 2;
-        this.blit(p_230450_1_, i, j, 0, 0, this.imageWidth, this.containerRows * 18 + 17);
-        this.blit(p_230450_1_, i, j + this.containerRows * 18 + 17, 0, 126, this.imageWidth, 96);
+    public void render(GuiGraphics p_282060_, int p_282533_, int p_281661_, float p_281873_) {
+        super.render(p_282060_, p_282533_, p_281661_, p_281873_);
+        this.renderTooltip(p_282060_, p_282533_, p_281661_);
     }
 
 }

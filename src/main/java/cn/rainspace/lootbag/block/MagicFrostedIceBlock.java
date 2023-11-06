@@ -1,7 +1,7 @@
 package cn.rainspace.lootbag.block;
 
 import cn.rainspace.lootbag.block.entity.MagicFrostedIceBlockEntity;
-import cn.rainspace.lootbag.block.entity.ModBlockEntityType;
+import cn.rainspace.lootbag.block.entity.BlockEntitys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -27,7 +27,7 @@ public class MagicFrostedIceBlock extends BaseEntityBlock implements EntityBlock
     }
 
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, ModBlockEntityType.MAGIC_FROSTED_ICE.get(), MagicFrostedIceBlockEntity::serverTick);
+        return level.isClientSide ? null : createTickerHelper(blockEntityType, BlockEntitys.MAGIC_FROSTED_ICE.get(), MagicFrostedIceBlockEntity::serverTick);
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

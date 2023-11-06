@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Collections;
 import java.util.Set;
 
-public class ModLootTables {
+public class LootTables {
     private static final Set<ResourceLocation> LOCATIONS = Sets.newHashSet();
     public static final ResourceLocation LOOT_BAG_GIFT = register("gameplay/loot_bag_gift");
     public static final ResourceLocation EXTRA_GIFT = register("gameplay/extra_gift");
