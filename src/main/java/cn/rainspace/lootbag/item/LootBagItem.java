@@ -38,37 +38,38 @@ public class LootBagItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (!world.isClientSide && hand == InteractionHand.MAIN_HAND) {
-            LootTable table = world.getServer().getLootData().getLootTable(LootTables.LOOT_BAG_GIFT);
-            LootParams params = (new LootParams.Builder((ServerLevel) world))
-                    .withLuck(player.getLuck())
-                    .withParameter(LootContextParams.THIS_ENTITY, player)
-                    .withParameter(LootContextParams.TOOL, itemstack)
-                    .withParameter(LootContextParams.ORIGIN, player.position())
-                    .create(LootContextParamSets.GIFT);
-            List<ItemStack> loot = table.getRandomItems(params);
-            NonNullList<ItemStack> filteredLoot = NonNullList.create();
-            for (ItemStack itemStack : loot) {
-                boolean shouldGet = true;
-                for (String id : Config.BLACK_LIST.get()) {
-                    if (id.equals(itemStack.getItem().builtInRegistryHolder().key().location().toString())) {
-                        shouldGet = false;
-                        break;
-                    }
-                }
-                if (shouldGet) {
-                    filteredLoot.add(itemStack);
-                }
-            }
-            if (Config.SLOT_MODE.get()) {
-                player.openMenu(new LootBagEntity((id, playerInventory, unused) -> new LootBagMenu(MenuType.GENERIC_9x3, id, playerInventory, new LootBagInventory(filteredLoot), 3), Component.translatable("item.lootbag.loot_bag")));
-            } else {
-                for (ItemStack itemStack : filteredLoot) {
-                    giveItem(player, itemStack);
-                }
-            }
-            itemstack.shrink(1);
+        if (world.isClientSide || hand != InteractionHand.MAIN_HAND) {
+            return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
         }
+        LootTable table = world.getServer().getLootData().getLootTable(LootTables.LOOT_BAG_GIFT);
+        LootParams params = (new LootParams.Builder((ServerLevel) world))
+                .withLuck(player.getLuck())
+                .withParameter(LootContextParams.THIS_ENTITY, player)
+                .withParameter(LootContextParams.TOOL, itemstack)
+                .withParameter(LootContextParams.ORIGIN, player.position())
+                .create(LootContextParamSets.GIFT);
+        List<ItemStack> loot = table.getRandomItems(params);
+        NonNullList<ItemStack> filteredLoot = NonNullList.create();
+        for (ItemStack itemStack : loot) {
+            boolean shouldGet = true;
+            for (String id : Config.BLACK_LIST.get()) {
+                if (id.equals(itemStack.getItem().builtInRegistryHolder().key().location().toString())) {
+                    shouldGet = false;
+                    break;
+                }
+            }
+            if (shouldGet) {
+                filteredLoot.add(itemStack);
+            }
+        }
+        if (Config.SLOT_MODE.get()) {
+            player.openMenu(new LootBagEntity((id, playerInventory, unused) -> new LootBagMenu(MenuType.GENERIC_9x3, id, playerInventory, new LootBagInventory(filteredLoot), 3), Component.translatable("item.lootbag.loot_bag")));
+        } else {
+            for (ItemStack itemStack : filteredLoot) {
+                giveItem(player, itemStack);
+            }
+        }
+        itemstack.shrink(1);
         return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
     }
 

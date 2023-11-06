@@ -6,14 +6,14 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lootbag:backpack"
+          "name": "${mod_id}:backpack"
         },
         {
           "type": "minecraft:item",
-          "name": "lootbag:frost_wand",
+          "name": "${mod_id}:frost_wand",
           "conditions": [
             {
-              "condition": "lootbag:biome_condition",
+              "condition": "${mod_id}:biome_condition",
               "biome_tag": [
                 "forge:is_cold",
                 "forge:is_snowy"
@@ -23,7 +23,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "lootbag:magic_mirror"
+          "name": "${mod_id}:magic_mirror"
         }
       ]
     }

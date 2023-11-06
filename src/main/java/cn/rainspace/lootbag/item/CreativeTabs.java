@@ -9,7 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CreativeTabs {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LootBag.MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LootBag.MOD_ID);
 
 
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab

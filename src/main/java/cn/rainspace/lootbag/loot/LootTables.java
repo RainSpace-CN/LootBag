@@ -1,6 +1,6 @@
 package cn.rainspace.lootbag.loot;
 
-import cn.rainspace.lootbag.utils.Const;
+import cn.rainspace.lootbag.LootBag;
 import com.google.common.collect.Sets;
 import net.minecraft.resources.ResourceLocation;
 
@@ -18,7 +18,7 @@ public class LootTables {
     private static final Set<ResourceLocation> IMMUTABLE_LOCATIONS = Collections.unmodifiableSet(LOCATIONS);
 
     private static ResourceLocation register(String p_186373_0_) {
-        return register(new ResourceLocation(Const.MOD_ID, p_186373_0_));
+        return register(new ResourceLocation(LootBag.MOD_ID, p_186373_0_));
     }
 
     private static ResourceLocation register(ResourceLocation p_186375_0_) {

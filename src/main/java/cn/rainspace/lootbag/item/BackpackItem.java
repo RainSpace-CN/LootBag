@@ -1,9 +1,9 @@
 package cn.rainspace.lootbag.item;
 
+import cn.rainspace.lootbag.LootBag;
 import cn.rainspace.lootbag.block.Blocks;
 import cn.rainspace.lootbag.block.entity.BackpackChestBlockEntity;
 import cn.rainspace.lootbag.container.menu.BackpackChestMenu;
-import cn.rainspace.lootbag.utils.Const;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -32,9 +32,9 @@ public class BackpackItem extends Item {
     @SubscribeEvent
     public static void onCloseMenu(PlayerContainerEvent.Close event) {
         if (event.getContainer() instanceof BackpackChestMenu container) {
-            BackpackChestBlockEntity tileEntity = (BackpackChestBlockEntity) container.getContainer();
-            ChunkPos chunkPos = new ChunkPos(tileEntity.getBlockPos());
-            ForgeChunkManager.forceChunk((ServerLevel) tileEntity.getLevel(), Const.MOD_ID, tileEntity.getBlockPos(), chunkPos.x, chunkPos.z, false, true);
+            BackpackChestBlockEntity blockEntity = (BackpackChestBlockEntity) container.getContainer();
+            ChunkPos chunkPos = new ChunkPos(blockEntity.getBlockPos());
+            ForgeChunkManager.forceChunk((ServerLevel) blockEntity.getLevel(), LootBag.MOD_ID, blockEntity.getBlockPos(), chunkPos.x, chunkPos.z, false, true);
         }
     }
 
@@ -54,14 +54,14 @@ public class BackpackItem extends Item {
             return InteractionResultHolder.consume(itemStack);
         }
         ChunkPos chunkPos = new ChunkPos(blockPos);
-        ForgeChunkManager.forceChunk(overWorld, Const.MOD_ID, blockPos, chunkPos.x, chunkPos.z, true, true);
+        ForgeChunkManager.forceChunk(overWorld, LootBag.MOD_ID, blockPos, chunkPos.x, chunkPos.z, true, true);
         player.openMenu((BackpackChestBlockEntity) chest);
         player.awardStat(Stats.ITEM_USED.get(this));
         return InteractionResultHolder.consume(itemStack);
     }
 
     public BlockPos getChestPos(Level world, ItemStack itemStack) {
-        CompoundTag tag = itemStack.getTag() != null ? itemStack.getTag() : new CompoundTag();
+        CompoundTag tag = itemStack.getOrCreateTag();
         BlockPos blockPos;
         if (!tag.contains("pos")) {
             blockPos = this.initChest(world, itemStack, tag);

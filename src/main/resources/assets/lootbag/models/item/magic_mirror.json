@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "lootbag:item/magic_mirror"
+    "layer0": "${mod_id}:item/magic_mirror"
   }
 }
