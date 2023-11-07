@@ -3,3 +3,5 @@
 /build
 /run
 /run-data
+/out
+.DS_Store

@@ -2,16 +2,15 @@ package cn.rainspace.lootbag;
 
 import cn.rainspace.lootbag.block.Blocks;
 import cn.rainspace.lootbag.block.entity.BlockEntitys;
-import cn.rainspace.lootbag.container.menu.ModMenuType;
+import cn.rainspace.lootbag.container.menu.MenuType;
 import cn.rainspace.lootbag.gui.screen.BackpackChestScreen;
 import cn.rainspace.lootbag.item.CreativeTabs;
 import cn.rainspace.lootbag.item.Items;
-import cn.rainspace.lootbag.loot.BiomeCheck;
+import cn.rainspace.lootbag.loot.LootConditions;
 import cn.rainspace.lootbag.loot.LootTables;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -30,7 +29,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
 import java.util.Set;
@@ -53,16 +51,9 @@ public class LootBag {
         Items.ITEMS.register(modEventBus);
         CreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         BlockEntitys.BLOCK_ENTITIES.register(modEventBus);
-        ModMenuType.CONTAINERS.register(modEventBus);
+        MenuType.CONTAINERS.register(modEventBus);
+        LootConditions.LOOT_CONDITIONS.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, cn.rainspace.lootbag.config.Config.SERVER_CONFIG);
-    }
-
-    @SubscribeEvent
-    public static void registerLootData(RegisterEvent event) {
-        if (!event.getRegistryKey().equals(Registries.LOOT_CONDITION_TYPE)) {
-            return;
-        }
-        event.register(Registries.LOOT_CONDITION_TYPE, new ResourceLocation(MOD_ID, "biome_condition"), () -> BiomeCheck.BIOME_CHECK);
     }
 
     @SubscribeEvent
@@ -101,7 +92,7 @@ public class LootBag {
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             event.enqueueWork(() -> {
-                MenuScreens.register(ModMenuType.BACKPACK_CHEST_CONTAINER.get(), BackpackChestScreen::new);
+                MenuScreens.register(MenuType.BACKPACK_CHEST_CONTAINER.get(), BackpackChestScreen::new);
             });
         }
 

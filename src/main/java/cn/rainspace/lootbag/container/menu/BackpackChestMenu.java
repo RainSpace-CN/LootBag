@@ -15,7 +15,7 @@ public class BackpackChestMenu extends AbstractContainerMenu {
     private final Container container;
 
     public BackpackChestMenu(int p_i50092_2_, Inventory p_i50092_3_, Container p_i50092_4_, int p_i50092_5_) {
-        super(ModMenuType.BACKPACK_CHEST_CONTAINER.get(), p_i50092_2_);
+        super(MenuType.BACKPACK_CHEST_CONTAINER.get(), p_i50092_2_);
         checkContainerSize(p_i50092_4_, p_i50092_5_ * 9);
         this.container = p_i50092_4_;
         this.containerRows = p_i50092_5_;

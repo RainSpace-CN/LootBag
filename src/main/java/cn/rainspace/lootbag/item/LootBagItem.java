@@ -73,7 +73,7 @@ public class LootBagItem extends Item {
         return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
     }
 
-    public boolean giveItem(Player player, ItemStack itemStack) {
+    private boolean giveItem(Player player, ItemStack itemStack) {
         if (player.getInventory().getFreeSlot() >= 0) {
             player.addItem(itemStack);
             return true;
