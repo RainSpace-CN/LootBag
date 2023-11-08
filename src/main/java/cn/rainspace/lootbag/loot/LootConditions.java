@@ -9,5 +9,5 @@ import net.minecraftforge.registries.RegistryObject;
 public class LootConditions {
 
     public static final DeferredRegister<LootItemConditionType> LOOT_CONDITIONS = DeferredRegister.create(Registries.LOOT_CONDITION_TYPE, LootBag.MOD_ID);
-    public static RegistryObject<LootItemConditionType> BIOME_CHECK = LOOT_CONDITIONS.register("biome_condition", () -> new LootItemConditionType(BiomeCheck.CODEC));
+    public static RegistryObject<LootItemConditionType> BIOME_CHECK = LOOT_CONDITIONS.register("biome_condition", () -> BiomeCheck.BIOME_CHECK);
 }
