@@ -98,7 +98,7 @@ public class LootBagItem extends Item {
         public static void onLivingDeath(LivingDeathEvent event) {
             LivingEntity entity = event.getEntity();
             if (entity.getType().getCategory().isFriendly() ||
-                    entity.getLastHurtByMob() instanceof Player ||
+                    !(entity.getLastHurtByMob() instanceof Player) ||
                     Config.ONLY_DROP_BY_NATURAL_ENTITY.get() && !entity.getTags().contains("natural")) {
                 return;
             }
